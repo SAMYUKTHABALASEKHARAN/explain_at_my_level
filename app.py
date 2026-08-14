@@ -17,8 +17,6 @@ print("=" * 55)
 print("             ExplainAtMyLevel")
 print("=" * 55)
 
-
-
 api_key = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=api_key)
 
@@ -157,6 +155,7 @@ def explain():
             }), 400
 
         # Generate three versions
+
         beginner = generate_explanation(
             topic,
             "beginner"
@@ -173,6 +172,7 @@ def explain():
         )
 
         # Calculate readability
+
         beginner_score = readability_score(
             beginner
         )
@@ -186,6 +186,7 @@ def explain():
         )
 
         # Calculate separation
+
         readability_separation = round(
             abs(
                 beginner_score - expert_score
@@ -194,6 +195,7 @@ def explain():
         )
 
         # Calculate adaptation
+
         adaptation_score = calculate_adaptation_score(
             beginner_score,
             expert_score
@@ -1388,7 +1390,9 @@ if __name__ == "__main__":
     )
 
     app.run(
-        host="127.0.0.1",
-        port=5000,
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
         debug=False
     )
+
+
